@@ -4,3 +4,6 @@
   column-gap: 1rem;
   align-items: center;
 }
+.single-item p {
+  text-transform: capitalize;
+}
