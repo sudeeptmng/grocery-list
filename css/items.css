@@ -3,6 +3,3 @@
   display: grid;
   row-gap: 1rem;
 }
-.single-item p {
-  text-transform: capitalize;
-}
