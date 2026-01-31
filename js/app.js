@@ -3,12 +3,18 @@ import { createItems } from "./items.js";
 import { createForm } from "./form.js";
 
 let items = groceryItems;
+let editId = null;
 
 function render() {
   const app = document.getElementById("app");
   app.innerHTML = "";
-  const formElement = createForm();
+
+  const formElement = createForm(
+    editId,
+    editId ? items.find((item) => item.id === editId) : null,
+  );
   const itemsElement = createItems(items);
+
   app.appendChild(formElement);
   app.appendChild(itemsElement);
 }
@@ -43,4 +49,26 @@ export function removeItem(itemId) {
   render();
   setTimeout(() => alert("Item Deleted Successfully!"), 0);
 }
+
+export function updateItemName(newName) {
+  items = items.map((item) => {
+    if (item.id === editId) {
+      return { ...item, name: newName };
+    }
+    return item;
+  });
+  editId = null;
+  render();
+  setTimeout(() => alert("Item Updated Successfully!"), 0);
+}
+
+export function setEditId(itemId) {
+  editId = itemId;
+  render();
+  setTimeout(() => {
+    const input = document.querySelector(".form-input");
+    if (input) input.focus();
+  }, 0);
+}
+
 render();
